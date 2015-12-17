@@ -1,4 +1,12 @@
-# R vs Python
+---
+title: R vs Python
+output: 
+  html_document: 
+    keep_md: yes
+    number_sections: yes
+    theme: flatly
+    toc: yes
+---
 
 
 
@@ -17,32 +25,22 @@ More geared for R users, trying out Python than otherwise. We use Rstudio and Rm
 conda install pandas
 ```
 
-
-```r
+```{r}
 Sys.setenv("PATH" = paste0( tools::file_path_as_absolute("~/anaconda/bin/"), ":", Sys.getenv("PATH") ) )
 # confirm path has changed
 Sys.getenv("PATH")
-```
-
-```
-## [1] "/Users/sahilseth/anaconda/bin:/Users/sahilseth/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin:/usr/texbin:~/anaconda/bin/:/Users/sahilseth/anaconda/bin"
-```
-
-```r
 # confirm we are using a newer python version
 system("python --version")
 ```
 
-
-```r
+```{r eval=FALSE}
 install.packages(c("e1071", "kknn", "randomForest", "rpart"))
 
 # extra libs to compile this document
 devtools::install_github("yihui/runr")
 ```
 
-
-```r
+```{r eval=FALSE}
 # Let use use a background python process to share variables 
 # across code chunks
 library(knitr)
@@ -86,21 +84,10 @@ Remove an object  | rm('name')  | del('object')
   Creating a data frame df of dimension 6x4 (6 rows and 4 columns) containing random
 numbers
 
-
-```r
+```{r}
 A <- matrix(runif(24,0,1), nrow=6, ncol=4)
 df <- data.frame(A)
 print(df)
-```
-
-```
-##          X1          X2        X3        X4
-## 1 0.5785109 0.976061355 0.5963867 0.8959784
-## 2 0.1427149 0.141696280 0.6152645 0.3076533
-## 3 0.9053654 0.007030172 0.3318626 0.7189255
-## 4 0.5207208 0.485407135 0.2051548 0.3243128
-## 5 0.7417043 0.758019980 0.4075929 0.6445321
-## 6 0.9168216 0.116357114 0.3973199 0.3022031
 ```
 
 
@@ -111,23 +98,12 @@ numbers between 0 to 1
 those random numbers, nrow and ncol sets the numbers of rows and columns to the matrix
 - data.frame converts the matrix to data frame | (Using pandas package*)
 
-
-```python
+```{python}
 import numpy as np
 import pandas as pd
 A=np.random.randn(6,4)
 df=pd.DataFrame(A)
 print(df)
-```
-
-```
-##           0         1         2         3
-## 0 -0.238747  0.162728  1.138519  0.870550
-## 1 -0.851066  1.049733  1.733656 -1.118668
-## 2  0.954509  0.796041  1.373411  0.026467
-## 3 -1.185182 -0.818893  0.475729  0.495886
-## 4 -0.441270  0.004957  1.006831 -1.982810
-## 5  0.378709 -0.347126 -0.061086 -1.007961
 ```
 
 
@@ -167,8 +143,7 @@ sorting the data  | `df[order(df$x)]` | `df.sort(['x'])`
 
 ## data.frame selection
 
-
-```python
+```{python}
 #print(df)
 ```
 
@@ -235,8 +210,7 @@ Data Visualization: Bubble
 
 To know more about svm function in R visit: http://cran.r-project.org/web/packages/e1071/
 
-
-```r
+```{r}
 library(e1071)
 data(iris)
 trainset = iris[1:149,]
@@ -244,12 +218,6 @@ testset = iris[150,]
 svm.model = svm(Species~., data = trainset, cost = 100, gamma = 1)
 svm.pred = predict(svm.model, testset)
 svm.pred
-```
-
-```
-##       150 
-## virginica 
-## Levels: setosa versicolor virginica
 ```
 
 To install sklearn library visit [scikit-learn.org](http://scikit-learn.org)
@@ -284,8 +252,7 @@ Output: Virginica Output: 2, corresponds to Virginica
 *To know more about lm function in R visit: https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html*
 
 
-
-```r
+```{r}
 library(broom)
 
 data(iris)
@@ -304,40 +271,16 @@ test_set <- iris[150,]
 
 fit <- lm(y ~ 0+Sepal.Length+ Sepal.Width +  Petal.Length+ Petal.Width , data=train_set)
 tidy(fit)
-```
 
-```
-##           term    estimate  std.error  statistic      p.value
-## 1 Sepal.Length -0.07454598 0.04926761 -1.5130828 1.324352e-01
-## 2  Sepal.Width -0.03465755 0.05695934 -0.6084611 5.438337e-01
-## 3 Petal.Length  0.21590110 0.05664803  3.8112730 2.037526e-04
-## 4  Petal.Width  0.60581643 0.09340629  6.4858203 1.301553e-09
-```
-
-```r
 coefficients(fit)
-```
-
-```
-## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
-##  -0.07454598  -0.03465755   0.21590110   0.60581643
-```
-
-```r
 predict.lm(fit, test_set)
-```
-
-```
-##      150 
-## 1.647771
 ```
 
 **Python**
 
 *To know more about sklearn linear regression visit: http://scikit- learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html*
 
-
-```python
+```{python, eval=FALSE}
 from sklearn import linear_model
 from sklearn import datasets
 iris = datasets.load_iris()
@@ -375,8 +318,7 @@ predict(iris.rf, test_set, predict.all=TRUE)
 
 *To know more about sklearn random forest visit: http://scikit- learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html*
 
-
-```python
+```{python, eval = FALSE}
 from sklearn import ensemble
 from sklearn import datasets
 
@@ -399,8 +341,8 @@ print(clf.predict(iris.data[1]))
 *To know more about rpart package in R visit: http://cran.r-project.org/web/packages/rpart/*
 
 
+```{r}
 
-```r
 library(rpart)
 data(iris)
 
@@ -415,8 +357,7 @@ pred = predict(fit, iris[sub, ], type = "class")
 
 *To know more about sklearn desicion tree visit : http://scikit- learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html*
 
-
-```python
+```{python, eval=FALSE}
 from sklearn.datasets
 import load_iris
 from sklearn.tree
@@ -440,8 +381,7 @@ print(clf.predict(iris.data[1]))
 
 *To know more about e1071 package in R visit: http://cran.r-project.org/web/packages/e1071/*
 
-
-```r
+```{r}
 library(e1071)
 data(iris)
 trainset = iris[1:149,]
@@ -449,11 +389,6 @@ testset = iris[150,]
 classifier = naiveBayes(trainset[,1:4], trainset[, 5])
 
 predict(classifier, testset[,5])
-```
-
-```
-## [1] setosa
-## Levels: setosa versicolor virginica
 ```
 
 **Python**
@@ -485,8 +420,7 @@ print(clf.predict(iris.data[1]))
 To know more about kknn package in R visit:
 
 
-
-```r
+```{r}
 library(kknn)
 data(iris)
 
@@ -496,26 +430,8 @@ testset = iris[150,]
 iris.kknn = kknn(Species~.,  trainset,testset, distance = 1, kernel = "triangular")
 
 summary(iris.kknn)
-```
-
-```
-## 
-## Call:
-## kknn(formula = Species ~ ., train = trainset, test = testset,     distance = 1, kernel = "triangular")
-## 
-## Response: "nominal"
-##         fit prob.setosa prob.versicolor prob.virginica
-## 1 virginica           0        0.232759       0.767241
-```
-
-```r
 fit <- fitted(iris.kknn)
 fit
-```
-
-```
-## [1] virginica
-## Levels: setosa versicolor virginica
 ```
 
 **Python**
@@ -523,8 +439,7 @@ fit
 *To know more about sklearn k nearest neighbors visit:
 [scikitlearn.org](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.NearestNeighbors.html)*
 
-
-```python
+```{python, eval=FALSE}
 from sklearn.datasets import load_iris
 from sklearn.neighbors import KNeighborsClassifier
 
