@@ -100,7 +100,7 @@ img {
 <p>(syntax ONLY, no winners here)</p>
 </blockquote>
 <p>A repo comparing syntax in R and Python for various tasks. Not comprehensive, but a subset of lines to get one started</p>
-<p>This is essentially a fork of a slide deck from <a href="http://www.datarobot.com/blog/introduction-to-python-for-statistical-learning/">Data Robot</a></p>
+<p>This is essentially a fork of a slide deck from <a href="http://www.slideshare.net/ajayohri/python-for-r-users">Decision Stats</a></p>
 <p>More geared for R users, trying out Python than otherwise. We use Rstudio and Rmarkdown to create the reference.</p>
 <blockquote>
 <p>RStudio users, you may want to check out anaconda and Spyder</p>
@@ -190,13 +190,13 @@ knit_engines$set(python = function(options) {
 <pre class="r"><code>A &lt;- matrix(runif(24,0,1), nrow=6, ncol=4)
 df &lt;- data.frame(A)
 print(df)</code></pre>
-<pre><code>##           X1         X2         X3        X4
-## 1 0.38769121 0.61070164 0.45839630 0.8748017
-## 2 0.78142772 0.35225496 0.70754285 0.8139977
-## 3 0.63562379 0.87954522 0.30848848 0.6577274
-## 4 0.48168549 0.03927636 0.17046819 0.9495895
-## 5 0.39752432 0.97241157 0.86772721 0.3855201
-## 6 0.07761387 0.43578958 0.05394876 0.3266002</code></pre>
+<pre><code>##          X1        X2        X3         X4
+## 1 0.6931230 0.6015008 0.1046730 0.11263823
+## 2 0.5489903 0.5208099 0.2222742 0.20499437
+## 3 0.8302021 0.8574484 0.8688427 0.42235095
+## 4 0.6647188 0.2850818 0.2752701 0.08572732
+## 5 0.2308311 0.3217553 0.1824425 0.94687186
+## 6 0.8539031 0.8982091 0.8509453 0.81176904</code></pre>
 <p>Here, - runif function generates 24 random numbers between 0 to 1 - matrix function creates a matrix from those random numbers, nrow and ncol sets the numbers of rows and columns to the matrix - data.frame converts the matrix to data frame | (Using pandas package*)</p>
 <p><strong>Python</strong></p>
 <pre class="python"><code>import numpy as np
@@ -205,12 +205,12 @@ A=np.random.randn(6,4)
 df=pd.DataFrame(A)
 print(df)</code></pre>
 <pre><code>##           0         1         2         3
-## 0  0.968129  0.863434 -0.527698 -0.052689
-## 1  1.327280 -0.643181  0.385854 -1.222533
-## 2  0.156054 -1.602339 -1.067114  1.693149
-## 3 -1.350301 -0.730792 -0.275557  1.859980
-## 4  1.843968  0.861415 -1.515628 -1.619218
-## 5 -1.128216  1.677406  0.896522  0.144093</code></pre>
+## 0  0.779054 -2.152155 -0.241349  0.954506
+## 1 -0.366108 -0.300663  0.754501  0.375287
+## 2  1.112291  0.618367 -2.167044 -0.013784
+## 3 -0.582921  0.852620  1.985113  0.580459
+## 4 -0.731002 -1.771527 -0.915140  0.294094
+## 5 -0.533750  0.636107 -0.405323  1.155731</code></pre>
 <p>Here,</p>
 <ul>
 <li>np.random.randn generates a matrix of 6 rows and 4 columns; this function is a part of <code>numpy</code> library</li>

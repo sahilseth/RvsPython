@@ -14,7 +14,7 @@ output:
 
 A repo comparing syntax in R and Python for various tasks. Not comprehensive, but a subset of lines to get one started
 
-This is essentially a fork of a slide deck from [Data Robot](http://www.datarobot.com/blog/introduction-to-python-for-statistical-learning/)
+This is essentially a fork of a slide deck from [Decision Stats](http://www.slideshare.net/ajayohri/python-for-r-users)
 
 More geared for R users, trying out Python than otherwise. We use Rstudio and Rmarkdown to create the reference.
 
