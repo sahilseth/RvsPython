@@ -94,13 +94,13 @@ print(df)
 ```
 
 ```
-##          X1          X2        X3        X4
-## 1 0.5785109 0.976061355 0.5963867 0.8959784
-## 2 0.1427149 0.141696280 0.6152645 0.3076533
-## 3 0.9053654 0.007030172 0.3318626 0.7189255
-## 4 0.5207208 0.485407135 0.2051548 0.3243128
-## 5 0.7417043 0.758019980 0.4075929 0.6445321
-## 6 0.9168216 0.116357114 0.3973199 0.3022031
+##           X1         X2         X3        X4
+## 1 0.38769121 0.61070164 0.45839630 0.8748017
+## 2 0.78142772 0.35225496 0.70754285 0.8139977
+## 3 0.63562379 0.87954522 0.30848848 0.6577274
+## 4 0.48168549 0.03927636 0.17046819 0.9495895
+## 5 0.39752432 0.97241157 0.86772721 0.3855201
+## 6 0.07761387 0.43578958 0.05394876 0.3266002
 ```
 
 
@@ -110,6 +110,9 @@ numbers between 0 to 1
 - matrix function creates a matrix from
 those random numbers, nrow and ncol sets the numbers of rows and columns to the matrix
 - data.frame converts the matrix to data frame | (Using pandas package*)
+
+
+**Python**
 
 
 ```python
@@ -122,12 +125,12 @@ print(df)
 
 ```
 ##           0         1         2         3
-## 0 -0.238747  0.162728  1.138519  0.870550
-## 1 -0.851066  1.049733  1.733656 -1.118668
-## 2  0.954509  0.796041  1.373411  0.026467
-## 3 -1.185182 -0.818893  0.475729  0.495886
-## 4 -0.441270  0.004957  1.006831 -1.982810
-## 5  0.378709 -0.347126 -0.061086 -1.007961
+## 0  0.968129  0.863434 -0.527698 -0.052689
+## 1  1.327280 -0.643181  0.385854 -1.222533
+## 2  0.156054 -1.602339 -1.067114  1.693149
+## 3 -1.350301 -0.730792 -0.275557  1.859980
+## 4  1.843968  0.861415 -1.515628 -1.619218
+## 5 -1.128216  1.677406  0.896522  0.144093
 ```
 
 
@@ -166,13 +169,6 @@ function | R | Python
 sorting the data  | `df[order(df$x)]` | `df.sort(['x'])`
 
 ## data.frame selection
-
-
-```python
-#print(df)
-```
-
-
 
 function | R | Python
 |:---|:---|:---|
@@ -233,6 +229,8 @@ Data Visualization: Bubble
 
 ## SVM on Iris Dataset
 
+**R**
+
 To know more about svm function in R visit: http://cran.r-project.org/web/packages/e1071/
 
 
@@ -252,12 +250,13 @@ svm.pred
 ## Levels: setosa versicolor virginica
 ```
 
+
+**Python**
+
 To install sklearn library visit [scikit-learn.org](http://scikit-learn.org)
 
 To know more about sklearn svm visit [sklearn.svm.SVC](http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html)
 
-
-Python (Using sklearn library)
 
 ```
 from sklearn import svm
@@ -273,7 +272,8 @@ y = iris.data[: 1], iris.target[: 1]
 clf.fit(X, y)
 # Testing the model on test data print
 clf.predict(iris.data[1])
-Output: Virginica Output: 2, corresponds to Virginica
+
+# Output: Virginica Output: 2, corresponds to Virginica
 ```
 
 
