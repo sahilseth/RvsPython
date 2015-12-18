@@ -25,7 +25,7 @@ More geared for R users, trying out Python than otherwise. We use Rstudio and Rm
 conda install pandas
 ```
 
-```{r}
+```{r echo=FALSE}
 Sys.setenv("PATH" = paste0( tools::file_path_as_absolute("~/anaconda/bin/"), ":", Sys.getenv("PATH") ) )
 # confirm path has changed
 Sys.getenv("PATH")
@@ -40,7 +40,7 @@ install.packages(c("e1071", "kknn", "randomForest", "rpart"))
 devtools::install_github("yihui/runr")
 ```
 
-```{r eval=FALSE}
+```{r eval=FALSE, echo=FALSE}
 # Let use use a background python process to share variables 
 # across code chunks
 library(knitr)

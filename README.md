@@ -18,19 +18,8 @@ conda install pandas
 ```
 
 
-```r
-Sys.setenv("PATH" = paste0( tools::file_path_as_absolute("~/anaconda/bin/"), ":", Sys.getenv("PATH") ) )
-# confirm path has changed
-Sys.getenv("PATH")
-```
-
 ```
 ## [1] "/Users/sahilseth/anaconda/bin:/Users/sahilseth/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin:/usr/texbin:~/anaconda/bin/:/Users/sahilseth/anaconda/bin"
-```
-
-```r
-# confirm we are using a newer python version
-system("python --version")
 ```
 
 
@@ -42,17 +31,6 @@ devtools::install_github("yihui/runr")
 ```
 
 
-```r
-# Let use use a background python process to share variables 
-# across code chunks
-library(knitr)
-library(runr)
-py = proc_python(8080)
-py$start()
-knit_engines$set(python = function(options) {
-    knitr:::wrap(py$exec(options$code), options)
-})
-```
 
 
 
@@ -94,13 +72,13 @@ print(df)
 ```
 
 ```
-##          X1        X2        X3         X4
-## 1 0.6931230 0.6015008 0.1046730 0.11263823
-## 2 0.5489903 0.5208099 0.2222742 0.20499437
-## 3 0.8302021 0.8574484 0.8688427 0.42235095
-## 4 0.6647188 0.2850818 0.2752701 0.08572732
-## 5 0.2308311 0.3217553 0.1824425 0.94687186
-## 6 0.8539031 0.8982091 0.8509453 0.81176904
+##           X1         X2        X3        X4
+## 1 0.01936265 0.28521997 0.8713807 0.6103073
+## 2 0.75989548 0.02908676 0.8715244 0.6717001
+## 3 0.56356359 0.67548734 0.1112149 0.7882679
+## 4 0.65357634 0.86374888 0.2054156 0.2614342
+## 5 0.44007293 0.13416091 0.7224302 0.3420280
+## 6 0.58476436 0.72279786 0.0595501 0.1235901
 ```
 
 
@@ -125,12 +103,12 @@ print(df)
 
 ```
 ##           0         1         2         3
-## 0  0.779054 -2.152155 -0.241349  0.954506
-## 1 -0.366108 -0.300663  0.754501  0.375287
-## 2  1.112291  0.618367 -2.167044 -0.013784
-## 3 -0.582921  0.852620  1.985113  0.580459
-## 4 -0.731002 -1.771527 -0.915140  0.294094
-## 5 -0.533750  0.636107 -0.405323  1.155731
+## 0 -1.078331 -0.814283  0.490614 -0.473481
+## 1 -1.137648  1.825572  1.387178 -0.491758
+## 2  1.336159 -0.532506 -2.633415 -0.413377
+## 3  1.341862  0.286481 -0.757951 -0.070875
+## 4 -0.269659  1.363134 -0.186930  0.672818
+## 5  1.325934 -0.133586  1.097086 -2.038539
 ```
 
 
