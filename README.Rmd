@@ -8,6 +8,9 @@ output:
     toc: yes
 ---
 
+```{bash echo=FALSE}
+lsof -i tcp:8083 | grep python | awk '{print $2}' | xargs kill
+```
 
 
 > (syntax ONLY, no winners here)
@@ -45,7 +48,7 @@ devtools::install_github("yihui/runr")
 # across code chunks
 library(knitr)
 library(runr)
-py = proc_python(8080)
+py = proc_python(8083)
 py$start()
 knit_engines$set(python = function(options) {
     knitr:::wrap(py$exec(options$code), options)
@@ -101,7 +104,8 @@ those random numbers, nrow and ncol sets the numbers of rows and columns to the 
 
 **Python**
 
-```{python}
+
+```{python create_df}
 import numpy as np
 import pandas as pd
 A=np.random.randn(6,4)
@@ -227,20 +231,23 @@ To install sklearn library visit [scikit-learn.org](http://scikit-learn.org)
 To know more about sklearn svm visit [sklearn.svm.SVC](http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html)
 
 
-```
+```{python svm_py}
 from sklearn import svm
-#Importing Dataset
 from sklearn import datasets
+
 #Calling SVM
 clf = svm.SVC()
-#Loading the package
+
 iris = datasets.load_iris()
+
 # Constructing training data X,
-y = iris.data[: 1], iris.target[: 1]
+X, y = iris.data[:-1], iris.target[:-1]
+
 # Fitting SVM
 clf.fit(X, y)
+
 # Testing the model on test data print
-clf.predict(iris.data[1])
+clf.predict(iris.data[-1])
 
 # Output: Virginica Output: 2, corresponds to Virginica
 ```
@@ -281,18 +288,18 @@ predict.lm(fit, test_set)
 
 *To know more about sklearn linear regression visit: http://scikit- learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html*
 
-```{python, eval=FALSE}
+```{python linear_reg}
 from sklearn import linear_model
 from sklearn import datasets
 iris = datasets.load_iris()
 regr = linear_model.LinearRegression()
 
-X, y = iris.data[: 1], iris.target[:1]
+X, y = iris.data[:-1], iris.target[:-1]
 
 regr.fit(X, y)
 
 print(regr.coef_)
-print(regr.predict(iris.data[1]))
+print(regr.predict(iris.data[-1]))
 ```
 
 
@@ -304,31 +311,27 @@ print(regr.predict(iris.data[1]))
 *To know more about randomForest package in R visit: http://cran.r-project.org/web/packages/randomForest/*
 
 
-```
+```{r rand_forest_r}
 library(randomForest)
-
 iris.rf <- randomForest(y ~ .,  data=train_set,ntree=100,importance=TRUE, proximity=TRUE)
-
 print(iris.rf)
-
 predict(iris.rf, test_set, predict.all=TRUE)
-
 ```
 
 **Python**
 
 *To know more about sklearn random forest visit: http://scikit- learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html*
 
-```{python, eval = FALSE}
+```{python rand_forest_py}
 from sklearn import ensemble
 from sklearn import datasets
 
 clf = ensemble.RandomForestClassifier(n_estimators=100, max_depth=10)
 iris = datasets.load_iris()
-X, y = iris.data[:1], iris.target[: 1]
+X, y = iris.data[:-1], iris.target[:-1]
 
 clf.fit(X, y)
-print(clf.predict(iris.data[1]))
+print(clf.predict(iris.data[-1]))
 
 # Output: 1.845 Output: 2
 
@@ -358,20 +361,18 @@ pred = predict(fit, iris[sub, ], type = "class")
 
 *To know more about sklearn desicion tree visit : http://scikit- learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html*
 
-```{python, eval=FALSE}
-from sklearn.datasets
-import load_iris
-from sklearn.tree
-import DecisionTreeClassifier
+```{python dec_tree_py}
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
 
 clf = DecisionTreeClassifier(random_state=0)
-iris = datasets.load_iris()
+iris = load_iris()
 
-X, y = iris.data[:1], iris.target[:1]
+X, y = iris.data[:-1], iris.target[:-1]
 
 clf.fit(X, y)
 
-print(clf.predict(iris.data[1]))
+print(clf.predict(iris.data[-1]))
 
 #Output: Virginica Output: 2, corresponds to virginica
 ```
@@ -396,20 +397,15 @@ predict(classifier, testset[,5])
 
 *To know more about sklearn Naive Bayes visit : http://scikit- learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html*
 
-```
+```{python naive_bayes_py}
 from sklearn.datasets import load_iris
 from sklearn.naive_bayes import GaussianNB
 
 clf = GaussianNB()
-
-iris = datasets.load_iris()
-
-X, y = iris.data[:1], iris.target[:1]
-
+iris = load_iris()
+X, y = iris.data[:-1], iris.target[:-1]
 clf.fit(X, y)
-
-print(clf.predict(iris.data[1]))
-
+print(clf.predict(iris.data[-1]))
 #Output: Virginica Output: 2, corresponds to virginica
 ```
 
@@ -440,19 +436,19 @@ fit
 *To know more about sklearn k nearest neighbors visit:
 [scikitlearn.org](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.NearestNeighbors.html)*
 
-```{python, eval=FALSE}
+```{python knn_py, eval=FALSE}
 from sklearn.datasets import load_iris
 from sklearn.neighbors import KNeighborsClassifier
 
 knn = KNeighborsClassifier()
 
-iris = datasets.load_iris()
+iris = load_iris()
 
-X, y = iris.data[:1], iris.target[:1]
+X, y = iris.data[:-1], iris.target[:-1]
 
 knn.fit(X,y)
 
-print(knn.predict(iris.data[1]))
+print(knn.predict(iris.data[-1]))
 
 # Output: Virginica Output: 2, corresponds to virginica
 ```
@@ -472,6 +468,11 @@ print(knn.predict(iris.data[1]))
 # Getting help on function
 
 
+
+
+```{r}
+#py$stop()
+```
 
 
 

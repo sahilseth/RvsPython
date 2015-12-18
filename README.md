@@ -2,6 +2,7 @@
 
 
 
+
 > (syntax ONLY, no winners here)
 
 A repo comparing syntax in R and Python for various tasks. Not comprehensive, but a subset of lines to get one started
@@ -19,7 +20,7 @@ conda install pandas
 
 
 ```
-## [1] "/Users/sahilseth/anaconda/bin:/Users/sahilseth/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin:/usr/texbin:~/anaconda/bin/:/Users/sahilseth/anaconda/bin"
+## [1] "/Users/sahilseth/anaconda/bin:/Users/sahilseth/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin:/usr/texbin"
 ```
 
 
@@ -72,13 +73,13 @@ print(df)
 ```
 
 ```
-##           X1         X2        X3        X4
-## 1 0.01936265 0.28521997 0.8713807 0.6103073
-## 2 0.75989548 0.02908676 0.8715244 0.6717001
-## 3 0.56356359 0.67548734 0.1112149 0.7882679
-## 4 0.65357634 0.86374888 0.2054156 0.2614342
-## 5 0.44007293 0.13416091 0.7224302 0.3420280
-## 6 0.58476436 0.72279786 0.0595501 0.1235901
+##            X1          X2         X3        X4
+## 1 0.008414911 0.311282917 0.61186960 0.8987637
+## 2 0.021930034 0.072141218 0.96503840 0.9508710
+## 3 0.227929049 0.840288003 0.61093433 0.3269284
+## 4 0.162879566 0.325983315 0.82753045 0.4227151
+## 5 0.593558020 0.009578978 0.84678802 0.2197988
+## 6 0.219805626 0.054050339 0.04714518 0.1655515
 ```
 
 
@@ -93,6 +94,7 @@ those random numbers, nrow and ncol sets the numbers of rows and columns to the 
 **Python**
 
 
+
 ```python
 import numpy as np
 import pandas as pd
@@ -103,12 +105,12 @@ print(df)
 
 ```
 ##           0         1         2         3
-## 0 -1.078331 -0.814283  0.490614 -0.473481
-## 1 -1.137648  1.825572  1.387178 -0.491758
-## 2  1.336159 -0.532506 -2.633415 -0.413377
-## 3  1.341862  0.286481 -0.757951 -0.070875
-## 4 -0.269659  1.363134 -0.186930  0.672818
-## 5  1.325934 -0.133586  1.097086 -2.038539
+## 0 -0.217405 -0.163276  0.936169 -0.089373
+## 1  2.276137  0.891530  1.257429 -0.686684
+## 2  0.295248 -0.528968  0.364880  0.274526
+## 3  0.854174 -2.911316  0.768290  0.972371
+## 4 -1.377254  2.524532 -0.718311  1.294197
+## 5  0.252250 -0.408106 -0.598757  1.542085
 ```
 
 
@@ -236,20 +238,24 @@ To install sklearn library visit [scikit-learn.org](http://scikit-learn.org)
 To know more about sklearn svm visit [sklearn.svm.SVC](http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html)
 
 
-```
+
+```python
 from sklearn import svm
-#Importing Dataset
 from sklearn import datasets
+
 #Calling SVM
 clf = svm.SVC()
-#Loading the package
+
 iris = datasets.load_iris()
+
 # Constructing training data X,
-y = iris.data[: 1], iris.target[: 1]
+X, y = iris.data[:-1], iris.target[:-1]
+
 # Fitting SVM
 clf.fit(X, y)
+
 # Testing the model on test data print
-clf.predict(iris.data[1])
+clf.predict(iris.data[-1])
 
 # Output: Virginica Output: 2, corresponds to Virginica
 ```
@@ -321,12 +327,17 @@ from sklearn import datasets
 iris = datasets.load_iris()
 regr = linear_model.LinearRegression()
 
-X, y = iris.data[: 1], iris.target[:1]
+X, y = iris.data[:-1], iris.target[:-1]
 
 regr.fit(X, y)
 
 print(regr.coef_)
-print(regr.predict(iris.data[1]))
+print(regr.predict(iris.data[-1]))
+```
+
+```
+## [-0.09726197 -0.05347337  0.21782359  0.61500051]
+## [ 1.65708429]
 ```
 
 
@@ -338,15 +349,69 @@ print(regr.predict(iris.data[1]))
 *To know more about randomForest package in R visit: http://cran.r-project.org/web/packages/randomForest/*
 
 
-```
+
+```r
 library(randomForest)
+```
 
+```
+## randomForest 4.6-12
+## Type rfNews() to see new features/changes/bug fixes.
+```
+
+```r
 iris.rf <- randomForest(y ~ .,  data=train_set,ntree=100,importance=TRUE, proximity=TRUE)
+```
 
+```
+## Warning in randomForest.default(m, y, ...): The response has five or fewer
+## unique values. Are you sure you want to do regression?
+```
+
+```r
 print(iris.rf)
+```
 
+```
+## 
+## Call:
+##  randomForest(formula = y ~ ., data = train_set, ntree = 100,      importance = TRUE, proximity = TRUE) 
+##                Type of random forest: regression
+##                      Number of trees: 100
+## No. of variables tried at each split: 1
+## 
+##           Mean of squared residuals: 0.01151123
+##                     % Var explained: 98.27
+```
+
+```r
 predict(iris.rf, test_set, predict.all=TRUE)
+```
 
+```
+## $aggregate
+##      150 
+## 1.963167 
+## 
+## $individual
+##     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13]
+## 150    2    2    2    2    2    2    2    2    2     2     2     2     2
+##     [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24]
+## 150     2   1.8     2     2     2     2     2     2     2     2     2
+##     [,25] [,26] [,27] [,28] [,29] [,30] [,31] [,32] [,33] [,34] [,35]
+## 150     2     2     2     2     2     2     2     2     2     2     2
+##     [,36] [,37] [,38] [,39] [,40] [,41] [,42] [,43] [,44] [,45] [,46]
+## 150     2     2     2     2     2   1.8     2     2     2     2     2
+##     [,47] [,48] [,49] [,50] [,51] [,52] [,53] [,54] [,55] [,56] [,57]
+## 150     2     2     2     2     2     2     1     2     2     2     2
+##     [,58] [,59] [,60] [,61] [,62] [,63] [,64] [,65] [,66] [,67] [,68]
+## 150     2     2     2     2     2     2     2     2     2     2     2
+##     [,69] [,70] [,71] [,72] [,73] [,74] [,75] [,76] [,77] [,78] [,79]
+## 150     2     2   1.8     2     2     2     2     2     2     2     2
+##     [,80] [,81] [,82] [,83] [,84] [,85] [,86] [,87] [,88] [,89]    [,90]
+## 150     2     2     2     2     2     1     2     2     2     2 1.666667
+##     [,91] [,92] [,93] [,94] [,95] [,96] [,97] [,98] [,99] [,100]
+## 150     2     2     2     2  1.25     2     2     2     2      2
 ```
 
 **Python**
@@ -360,13 +425,17 @@ from sklearn import datasets
 
 clf = ensemble.RandomForestClassifier(n_estimators=100, max_depth=10)
 iris = datasets.load_iris()
-X, y = iris.data[:1], iris.target[: 1]
+X, y = iris.data[:-1], iris.target[:-1]
 
 clf.fit(X, y)
-print(clf.predict(iris.data[1]))
+print(clf.predict(iris.data[-1]))
 
 # Output: 1.845 Output: 2
 
+```
+
+```
+## [2]
 ```
 
 
@@ -395,21 +464,23 @@ pred = predict(fit, iris[sub, ], type = "class")
 
 
 ```python
-from sklearn.datasets
-import load_iris
-from sklearn.tree
-import DecisionTreeClassifier
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
 
 clf = DecisionTreeClassifier(random_state=0)
-iris = datasets.load_iris()
+iris = load_iris()
 
-X, y = iris.data[:1], iris.target[:1]
+X, y = iris.data[:-1], iris.target[:-1]
 
 clf.fit(X, y)
 
-print(clf.predict(iris.data[1]))
+print(clf.predict(iris.data[-1]))
 
 #Output: Virginica Output: 2, corresponds to virginica
+```
+
+```
+## [2]
 ```
 
 ## Gaussian Naive Bayes
@@ -438,21 +509,21 @@ predict(classifier, testset[,5])
 
 *To know more about sklearn Naive Bayes visit : http://scikit- learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html*
 
-```
+
+```python
 from sklearn.datasets import load_iris
 from sklearn.naive_bayes import GaussianNB
 
 clf = GaussianNB()
-
-iris = datasets.load_iris()
-
-X, y = iris.data[:1], iris.target[:1]
-
+iris = load_iris()
+X, y = iris.data[:-1], iris.target[:-1]
 clf.fit(X, y)
-
-print(clf.predict(iris.data[1]))
-
+print(clf.predict(iris.data[-1]))
 #Output: Virginica Output: 2, corresponds to virginica
+```
+
+```
+## [2]
 ```
 
 
@@ -508,13 +579,13 @@ from sklearn.neighbors import KNeighborsClassifier
 
 knn = KNeighborsClassifier()
 
-iris = datasets.load_iris()
+iris = load_iris()
 
-X, y = iris.data[:1], iris.target[:1]
+X, y = iris.data[:-1], iris.target[:-1]
 
 knn.fit(X,y)
 
-print(knn.predict(iris.data[1]))
+print(knn.predict(iris.data[-1]))
 
 # Output: Virginica Output: 2, corresponds to virginica
 ```
@@ -534,6 +605,12 @@ print(knn.predict(iris.data[1]))
 # Getting help on function
 
 
+
+
+
+```r
+#py$stop()
+```
 
 
 
