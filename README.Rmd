@@ -23,6 +23,11 @@ More geared for R users, trying out Python than otherwise. We use Rstudio and Rm
 
 > RStudio users, you may want to check out anaconda and Spyder
 
+Seems recently pydata also came up with a similar cheatsheet comparing pandas with some of the R commands:
+
+http://pandas.pydata.org/pandas-docs/version/0.18.1/comparison_with_r.html
+
+
 ```
 # Let us use conda to get all the packs we need
 conda install pandas
